@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>К07-222</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+<!-- 
+
+Sonic Template 
+
+http://www.templatemo.com/tm-394-sonic 
+
+-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/MarkerCluster.css">
+	<link rel="stylesheet" href="css/MarkerCluster.Default.css">
+
+
+	<link rel="stylesheet" href="css/mine-style.css">
+	<link rel="stylesheet" href="css/templatemo_misc.css">
+	<link rel="stylesheet" href="css/templatemo_style.css">
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+</head>
+<body>
+	
+	<!-- This one in here is responsive menu for tablet and mobiles -->
+    <div class="responsive-navigation visible-sm visible-xs">
+        <a href="#" class="menu-toggle-btn">
+            <i class="fa fa-bars fa-2x"></i>
+        </a>
+        <div class="navigation responsive-menu">
+            <ul>
+                <li class="home"><a href="#templatemo">Home</a></li>
+	            <li class="home"><a href="#about">About Us</a></li>
+	            <li class="services"><a href="#services">Services</a></li>
+	            <li class="portfolio"><a href="#portfolio">Portfolio</a></li>
+	            <li class="contact"><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+	<div id="main-sidebar" class="hidden-xs hidden-sm" style="position: absolute">
+		<div class="logo">
+			<a href="#"><h1>К07-222</h1></a>
+			<span>Creative your own alco-rout</span>
+		</div>
+
+		<div id="about_us" style="display: none">
+			<img src="images/qq.jpg" height="70px" title="Владик" style="margin-left: 5px; margin-top: 5px"> <figcaption style="margin-left: 5px">Владик</figcaption><br>
+			<img src="images/ksu.jpg" height="70px" title="Ксюша" style="margin-left: 5px; margin-top: 5px"> <figcaption style="margin-left: 5px">Ксюша</figcaption><br>
+			<img src="images/volkov.jpg" height="70px" title="Дима" style="margin-left: 5px; margin-top: 5px"> <figcaption style="margin-left: 5px">Диман</figcaption><br>
+			<img src="images/sonya.jpg" height="70px" title="Соня" style="margin-left: 5px; margin-top: 5px; position: absolute; left: 90px; top: 275px;"> <figcaption style="margin-left: 5px; margin-top: 5px; position: absolute; left: 93px; top: 343px;">Соня</figcaption><br>
+		</div>
+
+		<div class="navigation" id="qq">
+	        <button class="menu_button" id="Nekit_button">
+				Бары
+			</button>
+			<button class="menu_button" id="Vlad_button">
+				Кафе
+			</button>
+			<button class="menu_button" id="Dima_button">
+				Магазины кулинарии
+			</button>
+			<button class="menu_button" id="Ksusha_button">
+				Закусочные
+			</button>
+			<button class="menu_button" id="Sonya_button">
+				О нас
+			</button>
+
+		</div>
+
+
+	</div>
+
+	<div id="main-content">
+
+		<div id="map">
+
+		</div>
+
+
+	</div>
+
+	<!-- JavaScripts -->
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/jquery.singlePageNav.js"></script>
+	<script src="js/jquery.flexslider.js"></script>
+	<script src="js/jquery.prettyPhoto.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/dbconnect.js"></script>
+	<script src="js/about_us.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<script src="http://maps.kosmosnimki.ru/api/api.js"></script>
+	<script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js" ></script>
+	<script src="js/leaflet.markercluster.js" ></script>
+	<script src="js/leaflet.markercluster-src.js" ></script>
+	<!--<link rel="stylesheet" href="dist/easyPrint.css"/>-->
+
+	<script>
+		var map = L.map('map').setView([55.75, 37.61], 11);
+
+		markers = new L.MarkerClusterGroup();
+
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+
+		L.control.locate({
+			position: 'topleft',
+			layer: new L.LayerGroup(),
+			drawCircle: true,
+			follow: false,
+			setView: true,
+			keepCurrentZoomLevel: true,
+			stopFollowingOnDrag: false,
+			remainActive: false,
+			markerClass: L.circleMarker,
+			circleStyle: {
+				opacity: 0.2
+			},
+			markerStyle: {},
+			followCircleStyle: {
+				opacity: 0.5
+			},
+			followMarkerStyle: {},
+			icon: 'fa fa-bolt',
+			iconLoading: 'fa fa-spinner fa-spin',
+			circlePadding: [0, 0],
+			metric: true,
+			onLocationError: function(err) {alert(err.message)},
+			onLocationOutsideMapBounds:  function(context) {
+				alert(context.options.strings.outsideMapBoundsMsg);
+			},
+			showPopup: true,
+			strings: {
+				title: "Show me where I am",
+				metersUnit: "meters",
+				feetUnit: "feet",
+				popup: "You are within {distance} {unit} from this point",
+				outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+			},
+			locateOptions: {}
+		}).addTo(map);
+
+//		var geocoder = L.Control.geocoder().addTo(map);
+//
+//		geocoder.markGeocode = function(result) {
+//			var bbox = result.bbox;
+//			L.polygon([
+//				bbox.getSouthEast(),
+//				bbox.getNorthEast(),
+//				bbox.getNorthWest(),
+//				bbox.getSouthWest()
+//			]).addTo(map);
+//		};
+	</script>
+
+	<!--<script type="javascript">-->
+
+		<!--var map = L.map("map", {-->
+			<!--center: [55.45, 37.37],-->
+			<!--zoom: 8-->
+		<!--});-->
+
+		<!--L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {-->
+			<!--attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',-->
+			<!--maxZoom: 18-->
+		<!--}).addTo('map');-->
+
+		<!--$(document).ready(function(){-->
+
+			<!--$("#map").click(function(event){-->
+
+				<!--console.log("Спасибо за посещение!");-->
+
+			<!--});-->
+
+		<!--});-->
+
+	<!--</script>-->
+
+	<!--<script>-->
+		<!--$(document).ready(function(){-->
+			<!--$("a[data-gal^='prettyPhoto']").prettyPhoto({hook: 'data-gal'});-->
+		<!--});-->
+
+        <!--function initialize() {-->
+          <!--var mapOptions = {-->
+            <!--zoom: 13,-->
+            <!--center: new google.maps.LatLng(40.7809919,-73.9665273)-->
+          <!--};-->
+
+          <!--var map = new google.maps.Map(document.getElementById('map-canvas'),-->
+              <!--mapOptions);-->
+        <!--}-->
+
+        <!--function loadScript() {-->
+          <!--var script = document.createElement('script');-->
+          <!--script.type = 'text/javascript';-->
+          <!--script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +-->
+              <!--'callback=initialize';-->
+          <!--document.body.appendChild(script);-->
+        <!--}-->
+
+        <!--window.onload = loadScript;-->
+    <!--</script>-->
+ <!--templatemo 394 sonic -->
+</body>
+</html>

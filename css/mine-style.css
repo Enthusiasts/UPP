@@ -1,0 +1,48 @@
+.menu_button{
+    background-color: cadetblue;
+    border: black;
+    height: 50px;
+    width: 300px;
+    position: absolute;
+    left: 5px;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-size: large;
+
+}
+.menu_button:active{
+    background-color: yellow;
+}
+#Nekit_button{
+    /*background-color: aquamarine;*/
+    top: 309px;
+}
+#Vlad_button{
+    /*background-color: chartreuse;*/
+    top: 365px;
+}
+#Dima_button{
+    /*background-color: chocolate;*/
+    top: 421px;
+}
+#Ksusha_button{
+    top: 477px;
+}
+#Sonya_button{
+    top: 575px;
+}
+#Sasha_button{
+    top: 590px;
+}
+#qq{
+    height: 430px;
+}
+#about_us{
+    height: 325px;
+}
+#map{
+    position: absolute;
+    width: 1050px;
+    left: 315px;
+    height: 100%;
+}
