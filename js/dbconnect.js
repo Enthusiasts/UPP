@@ -8,17 +8,26 @@ $(function() {
     var vlad = false;
     var dima = false;
     var ksusha = false;
+    var flag = false;
 
     $ ('#Sonya_button').click(function() {
-        document.getElementsByClassName("leaflet-marker-pane").innerHTML = '';
-        //var map = L.map('map').setView([55.75, 37.61], 11);
-        //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        //    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        //}).addTo(map);
+        if(flag == false){
+
+            map.removeLayer(markers);
+            document.getElementById('Sonya_button').style.display = 'none';
+            flag = true;
+            }
+        else {
+            alert("На карте нет точек");
+
+
+        }
+
     }),
     $('#Nekit_button').click(function() {
         if (nekit == false) {
             nekit = true;
+            flag = false;
             var routeObj = {};
             routeObj["type"] = 'bar';
             $.ajax({
@@ -61,6 +70,7 @@ $(function() {
     $('#Vlad_button').click(function()
     {   if (vlad == false) {
         vlad = true;
+        flag = false;
         var routeObj = {};
         routeObj["type"] = 'cafe';
         $.ajax({
@@ -102,6 +112,7 @@ $(function() {
     $('#Dima_button').click(function()
     {   if(dima == false) {
         dima = true;
+        flag = false;
             var routeObj = {};
             routeObj["type"] = 'cookery';
             $.ajax({
@@ -145,6 +156,7 @@ $(function() {
     {
         if(ksusha == false) {
             ksusha = true;
+            flag = false;
             var routeObj = {};
             routeObj["type"] = 'eatery';
             $.ajax({
