@@ -49,6 +49,7 @@ $(function() {
 
     function delete_points(name) {
         map.removeLayer(markers);
+        markers = new L.MarkerClusterGroup();
         try {
             document.getElementById('Nekit_button').style.display = 'block';
         }catch(e)
