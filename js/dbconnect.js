@@ -10,6 +10,7 @@ $(function() {
 
             var routeObj = {};
             routeObj["type"] = value;
+            routeObj["photos"] = "true";
             $.ajax({
                 type: 'get',
                 url: 'http://ec2-52-18-236-104.eu-west-1.compute.amazonaws.com/rona/api/entertainment/',
@@ -17,9 +18,11 @@ $(function() {
                 response: 'text',
                 success: function (data) {
                     console.log('success');
+                    console.log(data);
                     for (var i = 0; i < data.results.length; i++) {
                         var marker = new L.marker([data.results[i].latitude, data.results[i].longitude]);
                         title = {
+                            'instagram_urls': data.results.instagram_urls,
                             'cost': data.results[i].cost,
                             'ent_type': data.results[i].ent_type,
                             'seats_count': data.results[i].seats_count,
@@ -28,11 +31,21 @@ $(function() {
                         };
                         markers.addLayer(marker);
                         map.addLayer(markers);
-                        marker.bindPopup('<b>' + 'Средняя стоимость: ' + '</b>' + data.results[i].cost + '<br>'
-                            + '<b>' + 'Тип заведения: ' + '</b>' + data.results[i].ent_type + '<br>'
-                            + '<b>' + 'Количество посадочных мест: ' + '</b>' + data.results[i].seats_count + '<br>'
-                            + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
-                            + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title);
+                        if (data.results[i].instagram_urls[0] !== null) {
+                            marker.bindPopup('<b>' + 'Средняя стоимость: ' + '</b>' + data.results[i].cost + '<br>'
+                                + '<b>' + 'Тип заведения: ' + '</b>' + data.results[i].ent_type + '<br>'
+                                + '<b>' + 'Количество посадочных мест: ' + '</b>' + data.results[i].seats_count + '<br>'
+                                + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
+                                + '<b>' + 'Фото: ' + '</b>' + '<br>' + "<img src='" + data.results[i].instagram_urls[0]
+                                + "'width = '60'/>" + '<br>'
+                                + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title);
+                        }else{
+                            marker.bindPopup('<b>' + 'Средняя стоимость: ' + '</b>' + data.results[i].cost + '<br>'
+                                + '<b>' + 'Тип заведения: ' + '</b>' + data.results[i].ent_type + '<br>'
+                                + '<b>' + 'Количество посадочных мест: ' + '</b>' + data.results[i].seats_count + '<br>'
+                                + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
+                                + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title);
+                        }
                         console.log(data.results[i]);
                         console.log(markers);
 
