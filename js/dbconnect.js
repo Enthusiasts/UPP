@@ -8,29 +8,70 @@ $(function() {
     //$.getScript("js/l.control.geosearch.js", function(){
     //});
 
-
-
-
-    function markerDrag(e){
-        alert("You dragged to: " + e.latlng);
-    }
-
-    function initialize() {
+    self.initialize = function() {
         // Initialize the map
-        var map = L.map('map').setView([55.75, 37.61], 11);
+        self.map = L.map('map').setView([55.75, 37.61], 11);
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
             maxZoom: 18
         }).addTo(map);
 
-        // Event Handlers
-        map.on('click', function(e){
-            var marker = new L.Marker(e.latlng, {draggable:true});
-            marker.bindPopup("<strong>"+e.latlng+"</strong>").addTo(map);
+        //Init clusters
+        self.markers = createRonaMarkerClusterGroup();
 
-            marker.on('dragend', markerDrag);
+        //Init user position
+        self.userLocationControl = L.control.locate({
+            position: 'topleft',
+            layer: new L.LayerGroup(),
+            drawCircle: true,
+            follow: true,
+            setView: true,
+            keepCurrentZoomLevel: true,
+            stopFollowingOnDrag: false,
+            remainActive: false,
+            markerClass: L.circleMarker,
+            circleStyle: {
+                opacity: 0.2
+            },
+            markerStyle: {},
+            followCircleStyle: {
+                opacity: 0.5
+            },
+            followMarkerStyle: {},
+            icon: 'fa fa-bolt',
+            iconLoading: 'fa fa-spinner fa-spin',
+            circlePadding: [0, 0],
+            metric: true,
+            onLocationError: function(err) {alert(err.message)},
+            onLocationOutsideMapBounds:  function(context) {
+                alert(context.options.strings.outsideMapBoundsMsg);
+            },
+            showPopup: true,
+            strings: {
+                title: "Покажи меня",
+                metersUnit: "метров",
+                feetUnit: "шагов",
+                popup: "{distance} {unit} от этой точки",
+                outsideMapBoundsMsg: "Кажется, вы зашли за край карты."
+            },
+            locateOptions: {}
         });
-    }
+
+        userLocationControl.addTo(map);
+
+        self.routeControl = L.Routing.control({
+            position: 'topright',
+            layer: new L.LayerGroup(),
+            setView: true,
+            waypoints: [],
+            routeWhileDragging: true,
+            geocoder: L.Control.Geocoder.nominatim()
+        });
+        //routeControl.addTo(map);
+        routeControl.on('routingerror', function() {
+            alert("hm");
+        });
+    };
 
     self.get_marker_icon = function (num) {
         if (num === null) num = 0;
@@ -62,7 +103,8 @@ $(function() {
     };
 
     self.createRonaMarkerClusterGroup = function() {
-        return new L.MarkerClusterGroup({
+        return L.markerClusterGroup({
+            chunkedLoading: true,
             iconCreateFunction: function(cluster) {
                 var childs = cluster.getAllChildMarkers();
                 var childs_clusters_sum = childs
@@ -76,7 +118,7 @@ $(function() {
                 return get_cluster_icon(Math.floor(childs_clusters_sum/childs.length), childs.length, size_type);
             }
         });
-    }
+    };
 
     function add_points(value, name) {
 
@@ -135,24 +177,28 @@ $(function() {
                             var lat = data.results[i].latitude;
                             var lng = data.results[i].longitude;
                             var self = this;
-                            console.log([lat, lng]);
+                            //console.log([lat, lng]);
                             marker.bindPopup('<b>' + 'Средняя стоимость: ' + '</b>' + data.results[i].cost + '<br>'
                                 + '<b>' + 'Тип заведения: ' + '</b>' + data.results[i].ent_type + '<br>'
                                 + '<b>' + 'Количество посадочных мест: ' + '</b>' + data.results[i].seats_count + '<br>'
                                 + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
                                 + '<b>' + 'Фото: ' + '</b>' + '<br>' + photo +
                                 '<br>' + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title
-                            );//+ '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()" \>');
+                                + '<br>' + '<b>'); //+
+                                //'<input id="here" type = "button" value="Сюда" onclick="createPath('+ lat + ',' + lng + ')" \>');
+                                /* Мы же html генерим, поэтому вставляем точечки хардкорно.
+                                 * Единственная альтернатива - давать каждой кнопек айди и ловить через джейквери.*/
                         }else{
                             lat = data.results[i].latitude;
                             lng = data.results[i].longitude;
-                            console.log([lat, lng]);
+                            //console.log([lat, lng]);
                             marker.bindPopup('<b>' + 'Средняя стоимость: ' + '</b>' + data.results[i].cost + '<br>'
                                 + '<b>' + 'Тип заведения: ' + '</b>' + data.results[i].ent_type + '<br>'
                                 + '<b>' + 'Количество посадочных мест: ' + '</b>' + data.results[i].seats_count + '<br>'
                                 + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
                                 + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title
-                            );//+ '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()""\>');
+                                + '<br>' + '<b>');//+
+                                //'<input id="here" type = "button" value="Сюда" onclick="createPath('+ lat + ',' + lng + ')" \>');
                         }
                         //console.log(data.results[i]);
                         //console.log(markers);
@@ -221,7 +267,20 @@ $(function() {
         add_points(bar_points, name);
     });
 
-
+    self.createPath = function(lat_to, lon_to){
+        console.log("Catched to: " + lat_to + " " + lon_to);
+        var loc = map.locate()
+            .on('locationfound', function(from){
+                console.log("Catched from: " + from.latitude + " " + from.longitude);
+                self.routeControl.waypoints = [
+                    L.latLng({lon: lon_to, lat: lat_to}),
+                    L.latLng({lon: from.longitude, lat: from.latitude})
+                ];
+            })
+            .on('locationerror', function(){
+                console.log("Error during geolocation occured.")
+            })
+    };
     //$('#map').click(onMapClick);
     //$('#map').ready(initialize());
 }(jQuery));

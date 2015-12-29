@@ -29,9 +29,11 @@
         <entry file="file://$PROJECT_DIR$/js/dbconnect.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="173" column="48" selection-start-line="173" selection-start-column="48" selection-end-line="173" selection-end-column="48" />
+              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
               <folding>
-                <marker date="1451416360717" expanded="true" signature="4758:4839" placeholder="..." />
+                <marker date="1451425734884" expanded="true" signature="6282:6363" placeholder="..." />
+                <marker date="1451425734884" expanded="true" signature="7581:7714" placeholder="..." />
+                <marker date="1451425734884" expanded="true" signature="8713:8845" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -40,8 +42,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74862385">
-              <caret line="93" column="60" selection-start-line="93" selection-start-column="60" selection-end-line="93" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.18899083">
+              <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -50,7 +52,7 @@
       <file leaf-file-name="mine-style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/mine-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1923077">
+            <state vertical-scroll-proportion="2.5769231">
               <caret line="93" column="17" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
               <folding />
             </state>
@@ -77,6 +79,7 @@
         <option value="$PROJECT_DIR$/js/about_us.js" />
         <option value="$PROJECT_DIR$/css/templatemo_style.css" />
         <option value="$PROJECT_DIR$/css/mine-style.css" />
+        <option value="$PROJECT_DIR$/js/leaflet.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/dbconnect.js" />
       </list>
@@ -137,34 +140,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templatemo_394_sonic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roxana-map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templatemo_394_sonic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roxana-map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -176,6 +151,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="SearchEverywhereHistoryKey" value="logo&#9;null&#9;null" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63344/templatemo_394_sonic/index.html">
@@ -302,21 +278,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/templatemo_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/mine-style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -330,7 +291,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="152" column="17" selection-start-line="152" selection-start-column="17" selection-end-line="152" selection-end-column="17" />
           <folding>
-            <marker date="1451416360717" expanded="true" signature="4758:4839" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="6282:6363" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="7581:7714" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="8713:8845" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -386,7 +349,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1451416360717" expanded="true" signature="4758:4839" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="6282:6363" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="7581:7714" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="8713:8845" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -442,7 +407,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="11" />
           <folding>
-            <marker date="1451416360717" expanded="true" signature="4758:4839" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="6282:6363" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="7581:7714" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="8713:8845" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -483,7 +450,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="11" />
           <folding>
-            <marker date="1451416360717" expanded="true" signature="4758:4839" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="6282:6363" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="7581:7714" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="8713:8845" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -612,25 +581,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/leaflet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/leaflet/leaflet.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3321859">
           <caret line="5" column="13683" selection-start-line="5" selection-start-column="13683" selection-end-line="5" selection-end-column="13683" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/leaflet-routing-machine.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1878.8276">
-          <caret line="2147" column="27" selection-start-line="2147" selection-start-column="25" selection-end-line="2147" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -671,9 +625,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/leaflet-routing-machine.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/leaflet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2635659">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/leaflet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16504854">
+          <caret line="5" column="38" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="38" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/leaflet-routing-machine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.849387">
+          <caret line="206" column="16" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/mine-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1923077">
+        <state vertical-scroll-proportion="2.5769231">
           <caret line="93" column="17" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
           <folding />
         </state>
@@ -682,17 +670,19 @@
     <entry file="file://$PROJECT_DIR$/js/dbconnect.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="173" column="48" selection-start-line="173" selection-start-column="48" selection-end-line="173" selection-end-column="48" />
+          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
           <folding>
-            <marker date="1451416360717" expanded="true" signature="4758:4839" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="6282:6363" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="7581:7714" placeholder="..." />
+            <marker date="1451425734884" expanded="true" signature="8713:8845" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74862385">
-          <caret line="93" column="60" selection-start-line="93" selection-start-column="60" selection-end-line="93" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.18899083">
+          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
           <folding />
         </state>
       </provider>
