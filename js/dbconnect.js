@@ -3,8 +3,8 @@ $(function() {
     var self = this;
     const api_root = "http://ec2-52-18-236-104.eu-west-1.compute.amazonaws.com/rona/api";
 
-    $.getScript("js/leaflet.js", function(){
-    });
+    /*$.getScript("js/leaflet.js", function(){
+    });*/
     //$.getScript("js/l.control.geosearch.js", function(){
     //});
 
@@ -61,6 +61,23 @@ $(function() {
         });
     };
 
+    self.createRonaMarkerClusterGroup = function() {
+        return new L.MarkerClusterGroup({
+            iconCreateFunction: function(cluster) {
+                var childs = cluster.getAllChildMarkers();
+                var childs_clusters_sum = childs
+                    .map(function(marker) {
+                        return marker.model.cluster_type;
+                    })
+                    .reduce(function(a,b) {
+                        return a + b;
+                    });
+                const size_type = childs.length < 100 ? 3 : 5;
+                return get_cluster_icon(Math.floor(childs_clusters_sum/childs.length), childs.length, size_type);
+            }
+        });
+    }
+
     function add_points(value, name) {
 
 
@@ -75,7 +92,7 @@ $(function() {
                 response: 'text',
                 success: function (data) {
                     console.log('success');
-                    console.log(data);
+                    //console.log(data);
                     for (var i = 0; i < data.results.length; i++) {
                         var marker = new L.marker([data.results[i].latitude, data.results[i].longitude],
                             {
@@ -111,8 +128,8 @@ $(function() {
 
                         }
 
-                        console.log(data.results[i].latitude);
-                        console.log(data.results[i].longitude);
+                        //console.log(data.results[i].latitude);
+                        //console.log(data.results[i].longitude);
 
                         if (data.results[i].instagram_urls[0] !== null) {
                             var lat = data.results[i].latitude;
@@ -137,8 +154,8 @@ $(function() {
                                 + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title
                             );//+ '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()""\>');
                         }
-                        console.log(data.results[i]);
-                        console.log(markers);
+                        //console.log(data.results[i]);
+                        //console.log(markers);
 
                     }
                     map.addLayer(markers);
@@ -154,7 +171,7 @@ $(function() {
 
     function delete_points(name) {
         map.removeLayer(markers);
-        markers = new L.MarkerClusterGroup();
+        markers = createRonaMarkerClusterGroup();
         try {
             document.getElementById('Nekit_button').style.display = 'block';
         }catch(e)
