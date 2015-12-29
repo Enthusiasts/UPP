@@ -1,7 +1,7 @@
 
 $(function() {
     var self = this;
-    const api_root = "http://localhost:5000/rona/api";
+    const api_root = "http://ec2-52-18-236-104.eu-west-1.compute.amazonaws.com/rona/api";
 
     $.getScript("js/leaflet.js", function(){
     });
@@ -42,14 +42,22 @@ $(function() {
         });
     };
 
-    self.get_cluster_icon = function(num, stat) {
-        if (num === null) num = 0;
-        return L.icon({
-            iconUrl: api_root + '/static/img/cluster/' + num + '.png',
-            //html: "stat",
-            iconSize: [30, 30],
-            iconAnchor: [22, 30],
-            popupAnchor: [-3, -30]
+    //Cluster type is 0 - 10
+    //Stat is inner text
+    //Size_type is 3, 5
+    self.get_cluster_icon = function(cluster_type, stat, size_type) {
+        if (cluster_type === null) cluster_type = 0;
+        if (stat === null) stat = "";
+        if (size_type === null || !$.inArray(size_type, [3,5])) size_type = 3;
+        const size = size_type * 10;
+        return L.divIcon({
+            //iconUrl: api_root + '/static/img/cluster/' + num + '.png',
+            html:   "<img src=\"" + api_root + "/static/img/cluster/" + cluster_type +".png\"/> " +
+                    "<div>" + stat + "</div>",
+            className: "rona-cluster rona-cluster-" + size_type,
+            iconSize: [size, size],
+            iconAnchor: [22, size],
+            popupAnchor: [-3, -size]
         });
     };
 
@@ -117,7 +125,7 @@ $(function() {
                                 + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
                                 + '<b>' + 'Фото: ' + '</b>' + '<br>' + photo +
                                 '<br>' + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title
-                                + '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()" \>');
+                            );//+ '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()" \>');
                         }else{
                             lat = data.results[i].latitude;
                             lng = data.results[i].longitude;
@@ -127,7 +135,7 @@ $(function() {
                                 + '<b>' + 'Количество посадочных мест: ' + '</b>' + data.results[i].seats_count + '<br>'
                                 + '<b>' + 'Название: ' + '</b>' + data.results[i].title + '<br>'
                                 + '<b>' + 'Район: ' + '</b>' + data.results[i].zone_title
-                                + '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()""\>');
+                            );//+ '<br>' + '<b>' + '<input id="here" type = "button" value="Сюда" onclick="pidor()""\>');
                         }
                         console.log(data.results[i]);
                         console.log(markers);

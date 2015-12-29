@@ -51,8 +51,8 @@ http://www.templatemo.com/tm-394-sonic
 		<div id="left_block" >
 			<!--<img src="images/Hh4w4njJx-c.jpg" width="50%"><br>-->
 			<div class="logo">
-				<a href="#"><h1><img src="images/Hh4w4njJx-c.jpg" width="50%"><br></h1></a>
-				<span>Creative your own alco-rout</span>
+				<a href="#"><h1><img src="images/Hh4w4njJx-c.png" width="50%"><br></h1></a>
+				<span>Creating your own route</span>
 			</div>
 			<div class="navigation" style="margin-top: 30%;">
 				<button class="button" id="Nekit_button" value="bar">
@@ -107,8 +107,8 @@ http://www.templatemo.com/tm-394-sonic
 						.reduce(function(a,b) {
 							return a + b;
 						});
-
-				return get_cluster_icon(Math.floor(childs_clusters_sum/childs.length), childs.length);
+				const size_type = childs.length < 100 ? 3 : 5;
+				return get_cluster_icon(Math.floor(childs_clusters_sum/childs.length), childs.length, size_type);
 			}
 		});
 		var map = L.map('map').setView([55.75, 37.61], 11);
