@@ -1,6 +1,8 @@
 
 $(function() {
     var self = this;
+    const api_root = "http://localhost:5000/rona/api";
+
     $.getScript("js/leaflet.js", function(){
     });
     //$.getScript("js/l.control.geosearch.js", function(){
@@ -30,31 +32,55 @@ $(function() {
         });
     }
 
+    self.get_marker_icon = function (num) {
+        if (num === null) num = 0;
+        return L.icon({
+            iconUrl: api_root + '/static/img/marker/' + num + '.png',
+            iconSize: [40, 40],
+            iconAnchor: [22, 40],
+            popupAnchor: [-3, -40]
+        });
+    };
 
+    self.get_cluster_icon = function(num, stat) {
+        if (num === null) num = 0;
+        return L.icon({
+            iconUrl: api_root + '/static/img/cluster/' + num + '.png',
+            //html: "stat",
+            iconSize: [30, 30],
+            iconAnchor: [22, 30],
+            popupAnchor: [-3, -30]
+        });
+    };
 
     function add_points(value, name) {
 
 
             var routeObj = {};
             routeObj["type"] = value;
-            routeObj["photos"] = "true";
+            //routeObj["photos"] = "true";
+            routeObj["cluster"] = "checkins";
             $.ajax({
                 type: 'get',
-                url: 'http://ec2-52-18-236-104.eu-west-1.compute.amazonaws.com/rona/api/entertainment/',
+                url: api_root + '/entertainment/',
                 data: routeObj,
                 response: 'text',
                 success: function (data) {
                     console.log('success');
                     console.log(data);
                     for (var i = 0; i < data.results.length; i++) {
-                        var marker = new L.marker([data.results[i].latitude, data.results[i].longitude]);
-                        title = {
+                        var marker = new L.marker([data.results[i].latitude, data.results[i].longitude],
+                            {
+                                icon: get_marker_icon(data.results[i].cluster_type)
+                            });
+                        marker.model = {
                             'instagram_urls': data.results.instagram_urls,
                             'cost': data.results[i].cost,
                             'ent_type': data.results[i].ent_type,
                             'seats_count': data.results[i].seats_count,
                             'title': data.results[i].title,
-                            'zone_title': data.results[i].zone_title
+                            'zone_title': data.results[i].zone_title,
+                            'cluster_type': data.results[i].cluster_type
                         };
                         markers.addLayer(marker);
 
@@ -68,7 +94,7 @@ $(function() {
                         });
                         var photo ='';
                         try {
-                            for (var j = 0; j <= data.results[i].instagram_urls.length; j++) {
+                            for (var j = 0; j < data.results[i].instagram_urls.length; j++) {
                                 photo = photo + '<a target="_blank" href=' + data.results[i].instagram_urls[j]
                                     + '>' + "<img src='" + data.results[i].instagram_urls[j] + "'width = '60'/>" + '</a>';
                             }

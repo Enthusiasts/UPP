@@ -97,7 +97,20 @@ http://www.templatemo.com/tm-394-sonic
 	<script>
 
 
-		markers = new L.MarkerClusterGroup();
+		markers = new L.MarkerClusterGroup({
+			iconCreateFunction: function(cluster) {
+				var childs = cluster.getAllChildMarkers();
+				var childs_clusters_sum = childs
+						.map(function(marker) {
+							return marker.model.cluster_type;
+						})
+						.reduce(function(a,b) {
+							return a + b;
+						});
+
+				return get_cluster_icon(Math.floor(childs_clusters_sum/childs.length), childs.length);
+			}
+		});
 		var map = L.map('map').setView([55.75, 37.61], 11);
 		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -115,7 +128,7 @@ http://www.templatemo.com/tm-394-sonic
 
 
 
-		map.on('click', function(e){
+		/*map.on('click', function(e){
 
 			var marker = new L.Marker(e.latlng, {draggable:false});
 			marker.bindPopup("<strong>"+e.latlng+"</strong>").addTo(map);
@@ -131,7 +144,7 @@ http://www.templatemo.com/tm-394-sonic
 
 			}
 
-		});
+		});*/
 
 
 		function pidor(){
