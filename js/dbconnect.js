@@ -90,6 +90,7 @@ $(function() {
             var bar_points = document.getElementById('Nekit_button').value;
             document.getElementById('Nekit_button').style.display = 'none';
             add_points(bar_points, name);
+            if (self.global.ent_types == "undefined") self.global.ent_types = [bar_points];
             self.global.ent_types.push(bar_points);
             //alert(bar_points)
 
@@ -98,12 +99,14 @@ $(function() {
             var bar_points = document.getElementById('Vlad_button').value;
             document.getElementById('Vlad_button').style.display = 'none';
             add_points(bar_points, name);
+            if (self.global.ent_types == "undefined") self.global.ent_types = [bar_points];
             self.global.ent_types.push(bar_points);
         });
         $('#Dima_button').click(function(){
             var bar_points = document.getElementById('Dima_button').value;
             document.getElementById('Dima_button').style.display = 'none';
             add_points(bar_points, name);
+            if (self.global.ent_types == "undefined") self.global.ent_types = [bar_points];
             self.global.ent_types.push(bar_points);
 
         });
@@ -111,6 +114,8 @@ $(function() {
             var bar_points = document.getElementById('Ksusha_button').value;
             document.getElementById('Ksusha_button').style.display = 'none';
             add_points(bar_points, name);
+
+            if (self.global.ent_types == "undefined") self.global.ent_types = [bar_points];
             self.global.ent_types.push(bar_points);
         });
 
